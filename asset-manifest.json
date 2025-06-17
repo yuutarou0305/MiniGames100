@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/yuutarou0305.github.io/MiniGames100/static/css/main.f4bba276.css",
-    "main.js": "/yuutarou0305.github.io/MiniGames100/static/js/main.3e50538e.js",
-    "index.html": "/yuutarou0305.github.io/MiniGames100/index.html",
-    "main.f4bba276.css.map": "/yuutarou0305.github.io/MiniGames100/static/css/main.f4bba276.css.map",
-    "main.3e50538e.js.map": "/yuutarou0305.github.io/MiniGames100/static/js/main.3e50538e.js.map"
+    "main.css": "/MiniGames100/static/css/main.f4bba276.css",
+    "main.js": "/MiniGames100/static/js/main.2cc07ddf.js",
+    "index.html": "/MiniGames100/index.html",
+    "main.f4bba276.css.map": "/MiniGames100/static/css/main.f4bba276.css.map",
+    "main.2cc07ddf.js.map": "/MiniGames100/static/js/main.2cc07ddf.js.map"
   },
   "entrypoints": [
     "static/css/main.f4bba276.css",
-    "static/js/main.3e50538e.js"
+    "static/js/main.2cc07ddf.js"
   ]
 }
