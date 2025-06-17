@@ -2,7 +2,7 @@
   "name": "mini-games-collection",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://github.com/yuutarou0305.github.io/MiniGames100",
+  "homepage": "https://yuutarou0305.github.io/MiniGames100",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
