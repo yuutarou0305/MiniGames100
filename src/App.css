@@ -1,0 +1,27 @@
+.App {
+  text-align: center;
+  font-family: 'Noto Sans JP', sans-serif;
+  background: #f7fbff;
+  min-height: 100vh;
+}
+
+button {
+  font-family: 'Noto Sans JP', sans-serif;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: bold;
+  background: #174ea6;
+  color: white;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background: #1a56b4;
+}
+
+button:active {
+  background: #133d7d;
+} 
