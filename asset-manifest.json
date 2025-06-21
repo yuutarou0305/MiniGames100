@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/MiniGames100/static/css/main.77ed07fd.css",
-    "main.js": "/MiniGames100/static/js/main.978e0af0.js",
+    "main.js": "/MiniGames100/static/js/main.d02de5cd.js",
     "index.html": "/MiniGames100/index.html",
     "main.77ed07fd.css.map": "/MiniGames100/static/css/main.77ed07fd.css.map",
-    "main.978e0af0.js.map": "/MiniGames100/static/js/main.978e0af0.js.map"
+    "main.d02de5cd.js.map": "/MiniGames100/static/js/main.d02de5cd.js.map"
   },
   "entrypoints": [
     "static/css/main.77ed07fd.css",
-    "static/js/main.978e0af0.js"
+    "static/js/main.d02de5cd.js"
   ]
 }
