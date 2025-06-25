@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { BackButton } from '../components/commonStyles';
 
 const GameContainer = styled.div`
   width: 100%;
@@ -80,7 +81,7 @@ const Button = styled.button`
 
 const emojis = ['🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼'];
 
-const MemoryGame = ({ onGameOver, onScoreUpdate }) => {
+const MemoryGame = ({ onGameOver, onScoreUpdate, onBack }) => {
   const [cards, setCards] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
   const [matchedPairs, setMatchedPairs] = useState([]);
@@ -186,6 +187,7 @@ const MemoryGame = ({ onGameOver, onScoreUpdate }) => {
           </Grid>
         </>
       )}
+      <BackButton onClick={onBack}>ホームに戻る</BackButton>
     </GameContainer>
   );
 };

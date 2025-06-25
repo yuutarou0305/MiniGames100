@@ -18,6 +18,11 @@ import BlackjackGame from './games/BlackjackGame';
 import IrairaGame from './games/IrairaGame';
 import PacmanGame from './games/PacmanGame';
 import NumberGuessGame from './games/NumberGuessGame';
+import BombGame from './games/BombGame';
+import MathGame from './games/MathGame';
+import PrefectureQuizGame from './games/PrefectureQuizGame';
+import SpotTheDifferenceGame from './games/SpotTheDifferenceGame';
+import TrickQuizGame from './games/TrickQuizGame';
 import './App.css';
 
 const pastelColors = [
@@ -38,6 +43,7 @@ const AppContainer = styled.div`
 const Header = styled.header`
   text-align: center;
   margin-bottom: 40px;
+  color: #111;
 `;
 
 const Title = styled.h1`
@@ -70,7 +76,7 @@ const GameGrid = styled.div`
 
 const GameCard = styled.div`
   background: #fff;
-  color: #174ea6;
+  color: #111;
   border-radius: 14px;
   box-shadow: 0 2px 8px rgba(23, 78, 166, 0.08);
   border: 2px solid #b3d8f7;
@@ -136,6 +142,11 @@ const App = () => {
     { id: 'iraira', name: 'イライラ棒', component: IrairaGame },
     { id: 'pacman', name: 'パックマン', component: PacmanGame },
     { id: 'numberguess', name: '数あてゲーム', component: NumberGuessGame },
+    { id: 'bomb', name: '爆弾ゲーム', component: BombGame },
+    { id: 'math', name: '算数ゲーム', component: MathGame },
+    { id: 'prefecturequiz', name: '都道府県クイズ', component: PrefectureQuizGame },
+    { id: 'spotthedifference', name: '間違い探し', component: SpotTheDifferenceGame },
+    { id: 'trickquiz', name: '引っ掛けクイズ', component: TrickQuizGame },
   ];
 
   const handleGameSelect = (game) => {
@@ -147,6 +158,10 @@ const App = () => {
     setSelectedGame(null);
   };
 
+  const handleBack = () => {
+    setSelectedGame(null);
+  };
+
   const handleScoreUpdate = (score) => {
     setTotalScore(score);
   };
@@ -155,7 +170,7 @@ const App = () => {
     const game = games.find(g => g.id === selectedGame.id);
     if (!game) return null;
     const GameComponent = game.component;
-    return <GameComponent onGameOver={handleGameOver} onScoreUpdate={handleScoreUpdate} />;
+    return <GameComponent onGameOver={handleGameOver} onScoreUpdate={handleScoreUpdate} onBack={handleBack} />;
   };
 
   return (

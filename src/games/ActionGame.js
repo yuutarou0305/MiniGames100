@@ -1,5 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import { BackButton } from '../components/commonStyles';
+
+const GameWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const GameContainer = styled.div`
   width: 800px;
@@ -49,7 +56,7 @@ const Enemy = styled.div`
       case 'bomber':
         return '#800000';
       case 'ghost':
-        return 'rgba(255, 255, 255, 0.7)';
+        return 'rgba(0, 0, 0, 0.7)';
       case 'spinner':
         return '#4a90e2';
       case 'splitter':
@@ -119,7 +126,7 @@ const Button = styled.button`
   }
 `;
 
-const ActionGame = ({ onGameOver }) => {
+const ActionGame = ({ onGameOver, onBack }) => {
   const [player, setPlayer] = useState({ x: 400, y: 300 });
   const [enemies, setEnemies] = useState([]);
   const [coins, setCoins] = useState([]);
@@ -489,56 +496,47 @@ const ActionGame = ({ onGameOver }) => {
     onGameOver(score);
   };
 
-  if (!gameStarted) {
-    return (
-      <GameContainer>
-        <GameOver>
-          <h2>アクションゲーム</h2>
-          <p>制限時間: 60秒</p>
-          <p>コインを集めてスコアを稼ごう！</p>
-          <p>敵に触れるとゲームオーバー！</p>
-          <h3>敵の種類：</h3>
-          <p>・チェイサー（赤）: 通常の追跡者</p>
-          <p>・ジグザグ（オレンジ）: 波打つように動く</p>
-          <p>・ボマー（濃赤）: 近づくと加速</p>
-          <p>・ゴースト（白）: 時々透明になる</p>
-          <p>・スピナー（青）: 回転しながら追跡</p>
-          <p>・スプリッター（紫）: 分裂する</p>
-          <p>・スピードステアー（緑）: 超高速で移動する</p>
-          <p>・テレポーター（黄）: ランダムにテレポートする</p>
-          <Button onClick={handleStart}>ゲーム開始</Button>
-        </GameOver>
-      </GameContainer>
-    );
-  }
-
   return (
-    <GameContainer>
-      <Score>スコア: {score}</Score>
-      <Timer time={timeLeft}>残り時間: {timeLeft}秒</Timer>
-      <Player style={{ left: player.x, top: player.y }} />
-      {enemies.map(enemy => (
-        <Enemy
-          key={enemy.id}
-          style={{ left: enemy.x, top: enemy.y }}
-          type={enemy.type}
-          angle={enemy.angle}
-          visible={enemy.visible}
-        />
-      ))}
-      {coins.map(coin => (
-        <Coin key={coin.id} style={{ left: coin.x, top: coin.y }} />
-      ))}
-      {gameOver && (
-        <GameOver>
-          <h2>ゲームオーバー！</h2>
-          <p>最終スコア: {score}</p>
-          <Button onClick={handleRestart}>もう一度プレイ</Button>
-          <Button onClick={handleExit}>終了</Button>
-        </GameOver>
+    <GameWrapper>
+      { !gameStarted ? (
+        <GameContainer>
+          <GameOver>
+            <h2>アクションゲーム</h2>
+            <p>矢印キーまたはWASDで移動</p>
+            <p>敵を避けながらコインを集めよう！</p>
+            <Button onClick={handleStart}>ゲーム開始</Button>
+          </GameOver>
+        </GameContainer>
+      ) : (
+      <GameContainer>
+        <Score>スコア: {score}</Score>
+        <Timer time={timeLeft}>残り時間: {timeLeft}秒</Timer>
+        <Player style={{ left: player.x, top: player.y }} />
+        {enemies.map(enemy => (
+          <Enemy
+            key={enemy.id}
+            style={{ left: enemy.x, top: enemy.y }}
+            type={enemy.type}
+            angle={enemy.angle}
+            visible={enemy.visible}
+          />
+        ))}
+        {coins.map(coin => (
+          <Coin key={coin.id} style={{ left: coin.x, top: coin.y }} />
+        ))}
+        {gameOver && (
+          <GameOver>
+            <h2>ゲームオーバー！</h2>
+            <p>最終スコア: {score}</p>
+            <Button onClick={handleRestart}>もう一度プレイ</Button>
+            <Button onClick={handleExit}>終了</Button>
+          </GameOver>
+        )}
+      </GameContainer>
       )}
-    </GameContainer>
+      <BackButton onClick={onBack}>ホームに戻る</BackButton>
+    </GameWrapper>
   );
 };
 
-export default ActionGame; 
+export default ActionGame;

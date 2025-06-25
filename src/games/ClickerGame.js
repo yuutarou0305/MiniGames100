@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
+import { BackButton } from '../components/commonStyles';
 
 const GameContainer = styled.div`
   display: flex;
@@ -36,7 +37,7 @@ const Stats = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  color: white;
+  color: #111;
   font-size: 1.2rem;
   text-align: center;
 `;
@@ -44,7 +45,7 @@ const Stats = styled.div`
 const UpgradeButton = styled.button`
   background: rgba(255, 255, 255, 0.1);
   border: 2px solid #e94560;
-  color: white;
+  color: #111;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
@@ -73,7 +74,7 @@ const GameOver = styled.div`
   color: white;
 `;
 
-function ClickerGame({ onGameOver }) {
+function ClickerGame({ onGameOver, onBack }) {
   const [clicks, setClicks] = useState(0);
   const [clickPower, setClickPower] = useState(1);
   const [autoClickers, setAutoClickers] = useState(0);
@@ -169,6 +170,7 @@ function ClickerGame({ onGameOver }) {
           <button onClick={handleExit} style={{ marginLeft: '10px' }}>終了</button>
         </GameOver>
       )}
+      <BackButton onClick={onBack}>ホームに戻る</BackButton>
     </GameContainer>
   );
 }

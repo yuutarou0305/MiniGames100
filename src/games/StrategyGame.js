@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { BackButton } from '../components/commonStyles';
 
 const GameContainer = styled.div`
   width: 100vw;
@@ -28,7 +29,7 @@ const Cell = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: white;
   font-weight: bold;
   font-size: 18px;
   cursor: ${({ selectable }) => (selectable ? 'pointer' : 'default')};
@@ -36,7 +37,7 @@ const Cell = styled.div`
 `;
 
 const Stats = styled.div`
-  color: #fff;
+  color: white;
   margin-bottom: 10px;
 `;
 
@@ -84,7 +85,7 @@ const initialGrid = () => {
   return grid;
 };
 
-const StrategyGame = ({ onGameOver }) => {
+const StrategyGame = ({ onGameOver, onBack }) => {
   const [grid, setGrid] = useState(initialGrid());
   const [currentPlayer, setCurrentPlayer] = useState('player1');
   const [resources, setResources] = useState({ player1: 0, player2: 0 });
@@ -195,6 +196,7 @@ const StrategyGame = ({ onGameOver }) => {
           <Button onClick={handleExit}>終了</Button>
         </GameOver>
       )}
+      <BackButton onClick={onBack}>ホームに戻る</BackButton>
     </GameContainer>
   );
 };

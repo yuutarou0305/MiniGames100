@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
+import { BackButton } from '../components/commonStyles';
 
 const GameContainer = styled.div`
   display: flex;
@@ -12,7 +13,7 @@ const Board = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.1);
   padding: 10px;
   border-radius: 10px;
 `;
@@ -24,7 +25,7 @@ const Cell = styled.button`
   border: 2px solid #e94560;
   border-radius: 5px;
   font-size: 3rem;
-  color: white;
+  color: #111;
   cursor: pointer;
   transition: background 0.2s;
 
@@ -40,7 +41,7 @@ const Cell = styled.button`
 
 const Status = styled.div`
   font-size: 1.5rem;
-  color: white;
+  color: #111;
   text-align: center;
 `;
 
@@ -71,7 +72,7 @@ const Button = styled.button`
   }
 `;
 
-function TicTacToeGame({ onGameOver }) {
+function TicTacToeGame({ onGameOver, onBack }) {
   const [board, setBoard] = useState(Array(9).fill(null));
   const [isXNext, setIsXNext] = useState(true);
   const [winner, setWinner] = useState(null);
@@ -162,6 +163,7 @@ function TicTacToeGame({ onGameOver }) {
           <Button onClick={handleExit} style={{ marginLeft: '10px' }}>終了</Button>
         </GameOver>
       )}
+      <BackButton onClick={onBack}>ホームに戻る</BackButton>
     </GameContainer>
   );
 }

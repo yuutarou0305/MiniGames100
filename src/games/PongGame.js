@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
+import { BackButton } from '../components/commonStyles';
 
 const GameContainer = styled.div`
   display: flex;
@@ -38,7 +39,7 @@ const Ball = styled.div`
 
 const Score = styled.div`
   font-size: 1.5rem;
-  color: white;
+  color: #111;
   display: flex;
   gap: 40px;
 `;
@@ -55,7 +56,7 @@ const GameOver = styled.div`
   color: white;
 `;
 
-function PongGame({ onGameOver }) {
+function PongGame({ onGameOver, onBack }) {
   const [leftPaddle, setLeftPaddle] = useState(160);
   const [rightPaddle, setRightPaddle] = useState(160);
   const [ball, setBall] = useState({ x: 290, y: 190 });
@@ -169,6 +170,7 @@ function PongGame({ onGameOver }) {
           </GameOver>
         )}
       </GameBoard>
+      <BackButton onClick={onBack}>ホームに戻る</BackButton>
     </GameContainer>
   );
 }

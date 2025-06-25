@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
+import { BackButton } from '../components/commonStyles';
 
 const GameContainer = styled.div`
   display: flex;
@@ -34,7 +35,7 @@ const Food = styled.div`
 
 const Score = styled.div`
   font-size: 1.5rem;
-  color: white;
+  color: #111;
 `;
 
 const GameOver = styled.div`
@@ -49,7 +50,7 @@ const GameOver = styled.div`
   color: white;
 `;
 
-function SnakeGame({ onGameOver }) {
+function SnakeGame({ onGameOver, onBack }) {
   const [snake, setSnake] = useState([[0, 0]]);
   const [food, setFood] = useState([10, 10]);
   const [direction, setDirection] = useState('RIGHT');
@@ -181,6 +182,7 @@ function SnakeGame({ onGameOver }) {
           </GameOver>
         )}
       </GameBoard>
+      <BackButton onClick={onBack}>ホームに戻る</BackButton>
     </GameContainer>
   );
 }

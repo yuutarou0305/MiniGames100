@@ -72,7 +72,7 @@ const Ghost = styled.div`
 `;
 
 const Stats = styled.div`
-  color: #fff;
+  color: #111;
   font-size: 20px;
   margin: 10px;
 `;

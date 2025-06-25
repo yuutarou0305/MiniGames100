@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { BackButton } from '../components/commonStyles';
 
 const GameContainer = styled.div`
   width: 100%;
@@ -73,7 +74,7 @@ const Button = styled.button`
   }
 `;
 
-const PuzzleGame = ({ onGameOver, onScoreUpdate }) => {
+const PuzzleGame = ({ onGameOver, onScoreUpdate, onBack }) => {
   const [tiles, setTiles] = useState([]);
   const [moves, setMoves] = useState(0);
   const [time, setTime] = useState(0);
@@ -188,6 +189,7 @@ const PuzzleGame = ({ onGameOver, onScoreUpdate }) => {
           </Grid>
         </>
       )}
+      <BackButton onClick={onBack}>ホームに戻る</BackButton>
     </GameContainer>
   );
 };

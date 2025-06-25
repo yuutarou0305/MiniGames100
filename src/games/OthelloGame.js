@@ -9,6 +9,7 @@ const GameContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  color: #111;
 `;
 
 const Board = styled.div`
@@ -19,6 +20,7 @@ const Board = styled.div`
   background: #006400;
   padding: 10px;
   border-radius: 10px;
+  color: #111;
 `;
 
 const Cell = styled.div`
@@ -31,6 +33,7 @@ const Cell = styled.div`
   justify-content: center;
   cursor: ${({ selectable }) => (selectable ? 'pointer' : 'default')};
   border: ${({ selectable }) => (selectable ? '2px solid #fff' : 'none')};
+  color: #111;
 `;
 
 const Stone = styled.div`
@@ -39,16 +42,17 @@ const Stone = styled.div`
   border-radius: 50%;
   background: ${({ color }) => (color === 'black' ? '#222' : '#fff')};
   border: 2px solid #888;
+  color: #111;
 `;
 
 const Stats = styled.div`
-  color: #fff;
+  color: #111;
   margin-bottom: 10px;
 `;
 
 const GameOver = styled.div`
   background: rgba(0,0,0,0.9);
-  color: #fff;
+  color: #111;
   padding: 30px;
   border-radius: 10px;
   text-align: center;
@@ -60,7 +64,7 @@ const GameOver = styled.div`
 
 const Button = styled.button`
   background: #228B22;
-  color: #fff;
+  color: #111;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
@@ -128,7 +132,7 @@ function flipStones(board, x, y, current) {
   return newBoard;
 }
 
-const OthelloGame = ({ onGameOver }) => {
+const OthelloGame = ({ onGameOver, onBack }) => {
   const [board, setBoard] = useState(getInitialBoard());
   const [current, setCurrent] = useState('black');
   const [gameOver, setGameOver] = useState(false);
@@ -229,6 +233,9 @@ const OthelloGame = ({ onGameOver }) => {
           <Button onClick={handleRestart}>もう一度プレイ</Button>
           <Button onClick={handleExit}>終了</Button>
         </GameOver>
+      )}
+      {onBack && (
+        <Button onClick={onBack}>ホームに戻る</Button>
       )}
     </GameContainer>
   );

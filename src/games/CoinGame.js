@@ -41,6 +41,7 @@ const Coin = styled.div`
 const Score = styled.div`
   font-size: 24px;
   margin: 10px;
+  color: #111;
 `;
 
 const Button = styled.button`

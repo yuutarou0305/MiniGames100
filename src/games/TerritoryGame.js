@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { BackButton } from '../components/commonStyles';
+
+const GameWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const GameContainer = styled.div`
   width: 800px;
@@ -89,7 +96,7 @@ const Button = styled.button`
   }
 `;
 
-const TerritoryGame = ({ onGameOver, onScoreUpdate }) => {
+const TerritoryGame = ({ onGameOver, onScoreUpdate, onBack }) => {
   const [grid, setGrid] = useState([]);
   const [currentPlayer, setCurrentPlayer] = useState('player1');
   const [scores, setScores] = useState({ player1: 0, player2: 0 });
@@ -195,55 +202,61 @@ const TerritoryGame = ({ onGameOver, onScoreUpdate }) => {
 
   if (!gameStarted) {
     return (
-      <GameContainer>
-        <GameOver>
-          <h2>陣取りゲーム</h2>
-          <p>ルール:</p>
-          <p>・2人で交互に陣地を取っていきます</p>
-          <p>・灰色のセルは中立地で、取ると2ポイント獲得</p>
-          <p>・相手の陣地を取ると1ポイント獲得、相手は1ポイント失う</p>
-          <p>・60秒で終了、より多くのポイントを取った方が勝ち</p>
-          <Button onClick={handleStart}>ゲーム開始</Button>
-        </GameOver>
-      </GameContainer>
+      <GameWrapper>
+        <GameContainer>
+          <GameOver>
+            <h2>陣取りゲーム</h2>
+            <p>ルール:</p>
+            <p>・2人で交互に陣地を取っていきます</p>
+            <p>・灰色のセルは中立地で、取ると2ポイント獲得</p>
+            <p>・相手の陣地を取ると1ポイント獲得、相手は1ポイント失う</p>
+            <p>・60秒で終了、より多くのポイントを取った方が勝ち</p>
+            <Button onClick={handleStart}>ゲーム開始</Button>
+          </GameOver>
+        </GameContainer>
+        <BackButton onClick={onBack}>ホームに戻る</BackButton>
+      </GameWrapper>
     );
   }
 
   return (
-    <GameContainer>
-      <Stats>
-        <div style={{ color: '#ff4444' }}>プレイヤー1: {scores.player1}</div>
-        <div style={{ color: '#4444ff' }}>プレイヤー2: {scores.player2}</div>
-        <div>現在のターン: {currentPlayer === 'player1' ? 'プレイヤー1' : 'プレイヤー2'}</div>
-        <div>残り時間: {timeLeft}秒</div>
-      </Stats>
+    <GameWrapper>
+      <GameContainer>
+        <Stats>
+          <div style={{ color: '#ff4444' }}>プレイヤー1: {scores.player1}</div>
+          <div style={{ color: '#4444ff' }}>プレイヤー2: {scores.player2}</div>
+          <div>現在のターン: {currentPlayer === 'player1' ? 'プレイヤー1' : 'プレイヤー2'}</div>
+          <div>残り時間: {timeLeft}秒</div>
+        </Stats>
 
-      <Grid>
-        {grid.map((row, y) => 
-          row.map((cell, x) => (
-            <Cell
-              key={`${x}-${y}`}
-              owner={cell.owner}
-              isNeutral={cell.isNeutral}
-              onClick={() => handleCellClick(x, y)}
-            >
-              {cell.isNeutral ? 'N' : ''}
-            </Cell>
-          ))
+        <Grid>
+          {grid.map((row, y) => 
+            row.map((cell, x) => (
+              <Cell
+                key={`${x}-${y}`}
+                owner={cell.owner}
+                isNeutral={cell.isNeutral}
+                onClick={() => handleCellClick(x, y)}
+              >
+                {cell.isNeutral ? 'N' : ''}
+              </Cell>
+            ))
+          )}
+        </Grid>
+
+        {gameOver && (
+          <GameOver>
+            <h2>ゲーム終了！</h2>
+            <p>プレイヤー1: {scores.player1}ポイント</p>
+            <p>プレイヤー2: {scores.player2}ポイント</p>
+            <p>勝者: {scores.player1 > scores.player2 ? 'プレイヤー1' : 'プレイヤー2'}</p>
+            <Button onClick={handleRestart}>もう一度プレイ</Button>
+            <Button onClick={handleExit}>終了</Button>
+          </GameOver>
         )}
-      </Grid>
-
-      {gameOver && (
-        <GameOver>
-          <h2>ゲーム終了！</h2>
-          <p>プレイヤー1: {scores.player1}ポイント</p>
-          <p>プレイヤー2: {scores.player2}ポイント</p>
-          <p>勝者: {scores.player1 > scores.player2 ? 'プレイヤー1' : 'プレイヤー2'}</p>
-          <Button onClick={handleRestart}>もう一度プレイ</Button>
-          <Button onClick={handleExit}>終了</Button>
-        </GameOver>
-      )}
-    </GameContainer>
+      </GameContainer>
+      <BackButton onClick={onBack}>ホームに戻る</BackButton>
+    </GameWrapper>
   );
 };
 

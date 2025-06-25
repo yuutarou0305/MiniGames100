@@ -1,5 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import { BackButton } from '../components/commonStyles';
+
+const GameWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const GameContainer = styled.div`
   width: 800px;
@@ -19,7 +26,7 @@ const GameContainer = styled.div`
 const Word = styled.div`
   position: absolute;
   font-size: 24px;
-  color: ${props => props.color || 'white'};
+  color: white;
   transition: all 0.1s;
   user-select: none;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -47,6 +54,7 @@ const Stats = styled.div`
   top: 20px;
   left: 20px;
   font-size: 20px;
+  color: white;
 `;
 
 const GameOver = styled.div`
@@ -61,6 +69,7 @@ const GameOver = styled.div`
   align-items: center;
   justify-content: center;
   text-align: center;
+  color: white;
 `;
 
 const Button = styled.button`
@@ -87,7 +96,7 @@ const words = [
   'フレームワーク', 'ライブラリ', 'インターフェース', 'デザイン', 'パフォーマンス'
 ];
 
-const TypingGame = ({ onGameOver, onScoreUpdate }) => {
+const TypingGame = ({ onGameOver, onScoreUpdate, onBack }) => {
   const [activeWords, setActiveWords] = useState([]);
   const [input, setInput] = useState('');
   const [score, setScore] = useState(0);
@@ -222,65 +231,71 @@ const TypingGame = ({ onGameOver, onScoreUpdate }) => {
 
   if (!gameStarted) {
     return (
-      <GameContainer>
-        <GameOver>
-          <h2>タイピングゲーム</h2>
-          <p>ルール:</p>
-          <p>・画面上に流れてくる単語を入力してください</p>
-          <p>・単語が画面下まで落ちるとゲームオーバーです</p>
-          <p>・連続で入力するとコンボボーナスが付きます</p>
-          <p>・レベルが上がるごとに単語の速度が上がります</p>
-          <Button onClick={handleStart}>ゲーム開始</Button>
-        </GameOver>
-      </GameContainer>
+      <GameWrapper>
+        <GameContainer>
+          <GameOver>
+            <h2>タイピングゲーム</h2>
+            <p>ルール:</p>
+            <p>・画面上に流れてくる単語を入力してください</p>
+            <p>・単語が画面下まで落ちるとゲームオーバーです</p>
+            <p>・連続で入力するとコンボボーナスが付きます</p>
+            <p>・レベルが上がるごとに単語の速度が上がります</p>
+            <Button onClick={handleStart}>ゲーム開始</Button>
+          </GameOver>
+        </GameContainer>
+        <BackButton onClick={onBack}>ホームに戻る</BackButton>
+      </GameWrapper>
     );
   }
 
   return (
-    <GameContainer>
-      <Stats>
-        <div>スコア: {score}</div>
-        <div>レベル: {level}</div>
-        <div>コンボ: {combo}</div>
-        <div>最大コンボ: {maxCombo}</div>
-        <div>WPM: {wpm}</div>
-        <div>正確性: {accuracy}%</div>
-        <div>残り時間: {timeLeft}秒</div>
-      </Stats>
+    <GameWrapper>
+      <GameContainer>
+        <Stats>
+          <div>スコア: {score}</div>
+          <div>レベル: {level}</div>
+          <div>コンボ: {combo}</div>
+          <div>最大コンボ: {maxCombo}</div>
+          <div>WPM: {wpm}</div>
+          <div>正確性: {accuracy}%</div>
+          <div>残り時間: {timeLeft}秒</div>
+        </Stats>
 
-      {activeWords.map(word => (
-        <Word
-          key={word.id}
-          style={{
-            left: word.x,
-            top: word.y,
-            color: word.y > 500 ? '#ff4444' : 'white'
-          }}
-        >
-          {word.text}
-        </Word>
-      ))}
+        {activeWords.map(word => (
+          <Word
+            key={word.id}
+            style={{
+              left: word.x,
+              top: word.y,
+              color: word.y > 500 ? '#ff4444' : 'white'
+            }}
+          >
+            {word.text}
+          </Word>
+        ))}
 
-      <Input
-        ref={inputRef}
-        value={input}
-        onChange={handleInputChange}
-        placeholder="単語を入力..."
-      />
+        <Input
+          ref={inputRef}
+          value={input}
+          onChange={handleInputChange}
+          placeholder="単語を入力..."
+        />
 
-      {gameOver && (
-        <GameOver>
-          <h2>ゲーム終了！</h2>
-          <p>最終スコア: {score}</p>
-          <p>最大コンボ: {maxCombo}</p>
-          <p>到達レベル: {level}</p>
-          <p>WPM: {wpm}</p>
-          <p>正確性: {accuracy}%</p>
-          <Button onClick={handleRestart}>もう一度プレイ</Button>
-          <Button onClick={handleExit}>終了</Button>
-        </GameOver>
-      )}
-    </GameContainer>
+        {gameOver && (
+          <GameOver>
+            <h2>ゲーム終了！</h2>
+            <p>最終スコア: {score}</p>
+            <p>最大コンボ: {maxCombo}</p>
+            <p>到達レベル: {level}</p>
+            <p>WPM: {wpm}</p>
+            <p>正確性: {accuracy}%</p>
+            <Button onClick={handleRestart}>もう一度プレイ</Button>
+            <Button onClick={handleExit}>終了</Button>
+          </GameOver>
+        )}
+      </GameContainer>
+      <BackButton onClick={onBack}>ホームに戻る</BackButton>
+    </GameWrapper>
   );
 };
 

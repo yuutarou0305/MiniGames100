@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
+import { BackButton } from '../components/commonStyles';
 
 const GameContainer = styled.div`
   width: 100%;
@@ -76,7 +77,7 @@ const Button = styled.button`
   }
 `;
 
-const ShootingGame = ({ onGameOver, onScoreUpdate }) => {
+const ShootingGame = ({ onGameOver, onScoreUpdate, onBack }) => {
   const [playerX, setPlayerX] = useState(400);
   const [bullets, setBullets] = useState([]);
   const [enemies, setEnemies] = useState([]);
@@ -197,6 +198,11 @@ const ShootingGame = ({ onGameOver, onScoreUpdate }) => {
     onGameOver(0);
   };
 
+  const handleBackButtonClick = (e) => {
+    e.stopPropagation();
+    onBack();
+  }
+
   return (
     <GameContainer onMouseMove={handleMouseMove} onClick={handleClick}>
       {!gameStarted ? (
@@ -230,6 +236,7 @@ const ShootingGame = ({ onGameOver, onScoreUpdate }) => {
           </Stats>
         </>
       )}
+      <BackButton onClick={handleBackButtonClick} style={{position: 'absolute', top: '20px', right: '20px', zIndex: 10}}>ホームに戻る</BackButton>
     </GameContainer>
   );
 };
